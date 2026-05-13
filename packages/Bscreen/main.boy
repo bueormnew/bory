@@ -1,0 +1,41 @@
+var version = "0.1.0"
+
+task rgb(r, g, b) =>
+    give {r: r, g: g, b: b}
+
+task open(width, height, title) =>
+    give screen.open(width, height, title)
+
+task clear(window, color) =>
+    give screen.clear(window, color)
+
+task pixel(window, x, y, color) =>
+    give screen.set(window, x, y, color)
+
+task rect(window, x, y, width, height, color) =>
+    give screen.rect(window, x, y, width, height, color)
+
+task present(window) =>
+    give screen.present(window)
+
+task poll(window) =>
+    give screen.poll(window)
+
+task close(window) =>
+    give screen.close(window)
+
+task is_open(window) =>
+    give screen.is_open(window)
+
+task size(window) =>
+    give screen.size(window)
+
+task draw_matrix(window, matrix_data, offset_x, offset_y) =>
+    var row_index = 0
+    for row in matrix_data =>
+        var col_index = 0
+        for cell in row =>
+            screen.set(window, offset_x + col_index, offset_y + row_index, cell)
+            col_index += 1
+        row_index += 1
+    give window

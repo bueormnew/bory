@@ -1,0 +1,6 @@
+use demo_math
+
+echo("square:", demo_math.square(12))
+echo("cube:", demo_math.cube(4))
+
+

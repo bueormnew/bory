@@ -1,0 +1,43 @@
+use Bscreen as bs
+
+var version = "0.1.0"
+var colors = {
+    black: bs.rgb(0, 0, 0),
+    white: bs.rgb(255, 255, 255),
+    red: bs.rgb(255, 80, 80),
+    green: bs.rgb(80, 220, 140),
+    blue: bs.rgb(90, 150, 255),
+    yellow: bs.rgb(255, 210, 80)
+}
+
+task open(width, height, title) =>
+    give bs.open(width, height, title)
+
+task clear(window, color) =>
+    give bs.clear(window, color)
+
+task sprite(window, sprite_data, x, y) =>
+    give bs.draw_matrix(window, sprite_data, x, y)
+
+task rect(window, x, y, width, height, color) =>
+    give bs.rect(window, x, y, width, height, color)
+
+task present(window) =>
+    give bs.present(window)
+
+task input(window) =>
+    give bs.poll(window)
+
+task move(position, dx, dy) =>
+    give {x: position.x + dx, y: position.y + dy}
+
+task button_state(state, x, y, width, height) =>
+    var inside_x = state.mouse_x >= x and state.mouse_x <= x + width
+    var inside_y = state.mouse_y >= y and state.mouse_y <= y + height
+    give {
+        hover: inside_x and inside_y,
+        down: inside_x and inside_y and state.mouse_left
+    }
+
+task key_down(state, key_name) =>
+    give has(state.keys, key_name)

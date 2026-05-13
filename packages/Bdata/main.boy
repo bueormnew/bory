@@ -1,0 +1,61 @@
+var version = "0.1.0"
+
+task read_text(path) =>
+    give sys.read_text(path)
+
+task write_text(path, content) =>
+    give sys.write_text(path, content)
+
+task append_text(path, content) =>
+    give sys.append_text(path, content)
+
+task read_json(path) =>
+    give json.parse(sys.read_text(path))
+
+task write_json(path, value) =>
+    give sys.write_text(path, json.stringify(value, 2))
+
+task read_lines(path) =>
+    give text.split(sys.read_text(path), "\n")
+
+task write_lines(path, lines) =>
+    give sys.write_text(path, text.join(lines, "\n"))
+
+task csv_headers(csv_text) =>
+    var rows = text.split(text.trim(csv_text), "\n")
+    if size(rows) == 0 =>
+        give []
+    give text.split(rows[0], ",")
+
+task csv_rows(csv_text) =>
+    var raw_rows = text.split(text.trim(csv_text), "\n")
+    if size(raw_rows) <= 1 =>
+        give []
+
+    var headers = text.split(raw_rows[0], ",")
+    var output = []
+    for row from 1 to size(raw_rows) =>
+        var columns = text.split(raw_rows[row], ",")
+        var item = {}
+        var index = 0
+        for header in headers =>
+            item[header] = columns[index]
+            index += 1
+        push(output, item)
+    give output
+
+task read_csv(path) =>
+    var source = sys.read_text(path)
+    give {
+        headers: csv_headers(source),
+        rows: csv_rows(source)
+    }
+
+task write_csv(path, headers, rows) =>
+    var lines = [text.join(headers, ",")]
+    for row in rows =>
+        var values = []
+        for header in headers =>
+            push(values, row[header])
+        push(lines, text.join(values, ","))
+    give sys.write_text(path, text.join(lines, "\n"))

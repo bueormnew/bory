@@ -1,0 +1,21 @@
+struct Counter(value) =>
+    task inc() =>
+        self.value += 1
+        give self.value
+    end
+end
+
+class Label(text) =>
+    task shout() =>
+        give text.upper(self.text)
+    end
+end
+
+var counter = Counter(10)
+echo(counter.inc())
+echo(counter.inc())
+
+var label = Label("bory")
+echo(label.shout())
+
+

@@ -1,0 +1,85 @@
+use crate::span::Span;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TokenKind {
+    LeftParen,
+    RightParen,
+    LeftBrace,
+    RightBrace,
+    LeftBracket,
+    RightBracket,
+    Comma,
+    Dot,
+    Colon,
+    Semicolon,
+    Plus,
+    Minus,
+    Star,
+    Slash,
+    Percent,
+    Caret,
+    Equal,
+    EqualEqual,
+    BangEqual,
+    Greater,
+    GreaterEqual,
+    Less,
+    LessEqual,
+    PlusEqual,
+    MinusEqual,
+    StarEqual,
+    SlashEqual,
+    PercentEqual,
+    FatArrow,
+    Arrow,
+    Identifier,
+    Number,
+    String,
+    And,
+    Or,
+    Not,
+    If,
+    Elif,
+    Else,
+    While,
+    For,
+    In,
+    From,
+    To,
+    Step,
+    Task,
+    Struct,
+    Class,
+    Use,
+    As,
+    Give,
+    End,
+    Var,
+    Stop,
+    Skip,
+    Load,
+    Yes,
+    No,
+    Nil,
+    Newline,
+    Indent,
+    Dedent,
+    Eof,
+}
+
+#[derive(Debug, Clone)]
+pub struct Token {
+    pub kind: TokenKind,
+    pub lexeme: String,
+    pub span: Span,
+}
+
+impl Token {
+    pub fn new(kind: TokenKind, lexeme: impl Into<String>, span: Span) -> Self {
+        Self {
+            kind,
+            lexeme: lexeme.into(),
+            span,
+        }
+    }
+}

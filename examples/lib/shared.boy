@@ -1,0 +1,10 @@
+var shared_name = "internal BORY module"
+var shared_state = {
+    author: "BUEORM",
+    ready: yes
+}
+
+task triple(x) =>
+    give x * 3
+end
+

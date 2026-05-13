@@ -1,0 +1,7 @@
+load "lib/shared.boy"
+
+echo("loaded:", shared_name)
+echo("triple:", triple(9))
+echo("state:", shared_state)
+
+

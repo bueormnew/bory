@@ -1,0 +1,22 @@
+echo("== BORY data lab ==")
+
+rand.seed(7)
+
+var left = [[1, 2], [3, 4]]
+var right = [[5, 6], [7, 8]]
+var scores = [4, 9, 2, 7, 11]
+var pack = {
+    title: "demo",
+    generated_at: clock.now(),
+    average: mean(scores),
+    lucky: rand.int(10, 99)
+}
+
+push(scores, 15, 20)
+sort(scores)
+
+echo("matmul:", matrix.matmul(left, right))
+echo("scores:", scores)
+echo("json:", json.stringify(pack, yes))
+
+

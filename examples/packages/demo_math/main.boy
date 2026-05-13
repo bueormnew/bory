@@ -1,0 +1,7 @@
+task square(x) =>
+    give x * x
+end
+
+task cube(x) =>
+    give x * x * x
+end
